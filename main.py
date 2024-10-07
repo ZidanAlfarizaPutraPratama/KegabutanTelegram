@@ -3,7 +3,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, ContextTypes, CallbackQueryHandler
 
 # Ganti dengan token bot Anda
-my_bot_token = "7613389711:AAEMAU0Sns5ZLU4B_WwozjO_yVGb0UJgxQE"
+my_bot_token = "BOT_TOKEN" #ambil bot token dari @BotDFather
 
 # Enable logging
 logging.basicConfig(
@@ -12,9 +12,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Ganti dengan ID channel dan username Instagram Anda
-CHANNEL_ID = "@hanyachkecil"
-INSTAGRAM_USERNAME = "zidannnapp_"  # Hapus @ di sini untuk membuat tautan
+# Ganti dengan ID channel dan username Instagram kalian
+CHANNEL_ID = "@" #isi dengan nama ch kalian
+INSTAGRAM_USERNAME = "@"  # Hapus @ di sini untuk membuat tautan
 
 # Handler untuk perintah /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
