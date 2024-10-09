@@ -3,7 +3,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, ContextTypes, CallbackQueryHandler
 
 # Ganti dengan token bot Anda
-my_bot_token = "BOT_TOKEN" #ambil bot token dari @BotDFather
+my_bot_token = "BOT_TOKEN"  # ambil bot token dari @BotFather
 
 # Enable logging
 logging.basicConfig(
@@ -13,14 +13,17 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Ganti dengan ID channel dan username Instagram kalian
-CHANNEL_ID = "@" #isi dengan nama ch kalian
+CHANNEL_ID = "@"  # isi dengan nama ch kalian
 INSTAGRAM_USERNAME = "@"  # Hapus @ di sini untuk membuat tautan
 
 # Handler untuk perintah /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_first_name = update.message.from_user.first_name  # Ambil nama depan pengguna
     keyboard = [
-        [InlineKeyboardButton("sfs & follow ig", callback_data='subscribe_channel')]
+        [
+            InlineKeyboardButton("SFS", callback_data='sfs'),
+            InlineKeyboardButton("Follow IG", callback_data='follow_ig')
+        ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(f"Selamat datang, {user_first_name}! Gunakan tombol di bawah ini:", reply_markup=reply_markup)
@@ -30,10 +33,14 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     query = update.callback_query
     await query.answer()  # Acknowledge the button press
 
-    if query.data == 'subscribe_channel':
+    if query.data == 'sfs':
         await query.edit_message_text(
-            text=f"Sfs? disini kak:\n{CHANNEL_ID}\n\n"
-                 f"Follow ig? disini juga kak: https://instagram.com/{INSTAGRAM_USERNAME}",
+            text=f"SFS? disini kak:\n{CHANNEL_ID}",
+            disable_web_page_preview=False  # Ubah ini menjadi True jika ingin menonaktifkan preview
+        )
+    elif query.data == 'follow_ig':
+        await query.edit_message_text(
+            text=f"Follow IG? disini kak: https://instagram.com/{INSTAGRAM_USERNAME}",
             disable_web_page_preview=False  # Ubah ini menjadi True jika ingin menonaktifkan preview
         )
 
